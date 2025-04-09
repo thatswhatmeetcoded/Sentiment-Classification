@@ -25,12 +25,14 @@ def clean_text(text):
 
 # ---------- LOAD MODELS ----------
 try:
-    vectorizer = joblib.load('vectorizers/tfidf_vectorizer.pkl')
-    model = joblib.load('models/decision_tree_tf-idf.pkl')
-    label_encoder = joblib.load('vectorizers/label_encoder.pkl')
+    vectorizer = joblib.load('../decision_tree/vectorizers/tfidf_vectorizer.pkl')
+    svd = joblib.load('../decision_tree/vectorizers/svd_tfidf.pkl')
+    model = joblib.load('../decision_tree/models/decision_tree_tf-idf.pkl')
+    label_encoder = joblib.load('../decision_tree/vectorizers/label_encoder.pkl')
 except Exception as e:
     vectorizer = None
     model = None
+    svd = None
     label_encoder = None
     print("Error loading models:", e)
 
@@ -52,7 +54,7 @@ if page == "Home":
         - View model performances
         - Run a live text simulation with our Decision Tree model
     """)
-    st.image("https://miro.medium.com/v2/resize:fit:1000/1*dJJ6tG0MNk6fD4O73bpq7A.png", use_column_width=True)
+    st.image("https://miro.medium.com/v2/resize:fit:1000/1*dJJ6tG0MNk6fD4O73bpq7A.png", use_container_width=True)
 
 # ---------- DUMMY MODEL ANALYSIS ----------
 def model_analysis_page(name, accuracy, precision, recall, f1, notes):
@@ -96,6 +98,7 @@ elif page == "Simulation":
 
                 try:
                     X_vec = vectorizer.transform([cleaned])
+                    X_reduced = svd.transform(X_vec)  
                     pred = model.predict(X_vec)[0]
                     pred_label = label_encoder.inverse_transform([pred])[0] if label_encoder else label_mapping.get(pred, str(pred))
 
