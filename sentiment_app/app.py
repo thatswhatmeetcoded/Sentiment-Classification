@@ -99,11 +99,11 @@ elif page == "Simulation":
                 try:
                     X_vec = vectorizer.transform([cleaned])
                     X_reduced = svd.transform(X_vec)  
-                    pred = model.predict(X_vec)[0]
+                    pred = model.predict(X_reduced)[0]
                     pred_label = label_encoder.inverse_transform([pred])[0] if label_encoder else label_mapping.get(pred, str(pred))
 
                     st.success(f"🎯 Predicted Sentiment: **{pred_label}**")
                 except Exception as e:
                     st.error(f"Prediction failed: {e}")
         else:
-            st.error("Models not loaded correctly. Please recheck your files.")
+            st.error("Models not loaded correctly.Please recheck your files.")
