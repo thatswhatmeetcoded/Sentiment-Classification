@@ -63,18 +63,17 @@ label_mapping = {0: "Negative", 1: "Positive", 2: "Neutral"}
 st.set_page_config(page_title="Sentiment App", layout="wide")
 
 # ---------- SIDEBAR ----------
-st.sidebar.title("🧠 Model Explorer")
-page = st.sidebar.radio("Navigate to:", ["Home","Linear Regression","Naive Bayes", "Decision Tree", "ANN", "Clustering", "Simulation"])
+st.sidebar.title("Model Explorer")
+page = st.sidebar.radio("Navigate to:", ["Home","Logistic Regression","KNN","Naive Bayes", "Decision Tree", "ANN", "Clustering", "Live Simulation","About"])
 
 # ---------- HOME ----------
 if page == "Home":
-    st.title("📊 Sentiment Analysis Models Overview")
-    st.write("""
-        Welcome to the Sentiment Analysis Dashboard. Here you can:
-        - View model performances
-        - Run a live text simulation with our Decision Tree model
-    """)
-    st.image("https://miro.medium.com/v2/resize:fit:1000/1*dJJ6tG0MNk6fD4O73bpq7A.png", use_container_width=True)
+    import subpages.home as hm
+    hm.render()
+
+elif page == "About":
+    import subpages.about as ab
+    ab.render()
 
 elif page == "Naive Bayes":
     import subpages.naive_bayes as nb
