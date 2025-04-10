@@ -24,23 +24,33 @@ def load_decision_tree_models():
 #         print(f"Error loading Naive Bayes model models: {e}")
 #         return None, None, None, None
 def load_naive_bayes():
-    try:
-        print("Loading Naive Bayes models...")
-        #vectorizer = joblib.load("../naive_bayes/vectorisers/tfidf_vectorizer.pkl")
-        vectorizer = joblib.load("../naive_bayes/vectorisers/tokenizer_data.pkl")
-        print("Vectorizer loaded")
+    # try:
+    #     print("Loading Naive Bayes models...")
+    #     #vectorizer = joblib.load("../naive_bayes/vectorisers/tfidf_vectorizer.pkl")
+    #     vectorizer = joblib.load("../naive_bayes/vectorisers/tokenizer_data.pkl")
+    #     print("Vectorizer loaded")
         
-        svd = joblib.load("../decision_tree/vectorizers/svd_tfidf.pkl")  # Confirm if needed
-        print("SVD loaded (although unused)")
+    #     svd = joblib.load("../decision_tree/vectorizers/svd_tfidf.pkl")  # Confirm if needed
+    #     print("SVD loaded (although unused)")
 
-        #model = joblib.load("../naive_bayes/model/nb_model_tfidf.pkl")  # Check if file exists
-        model = joblib.load("../naive_bayes/model/nb_model_scratch.pkl")  # Check if file exists
-        print("Model loaded")
+    #     #model = joblib.load("../naive_bayes/model/nb_model_tfidf.pkl")  # Check if file exists
+    #     model = joblib.load("../naive_bayes/model/nb_model_scratch.pkl")  # Check if file exists
+    #     print("Model loaded")
 
-        label_encoder = joblib.load("../decision_tree/vectorizers/label_encoder.pkl")  # Confirm same encoder?
-        print("Label encoder loaded")
+    #     label_encoder = joblib.load("../decision_tree/vectorizers/label_encoder.pkl")  # Confirm same encoder?
+    #     print("Label encoder loaded")
 
-        return model, vectorizer, svd, label_encoder
+    #     return model, vectorizer, svd, label_encoder
+    try:
+        print("Loading from-scratch Naive Bayes model...")
+        with open("../naive_bayes/model/naive_bayes_full_model.pkl", "rb") as f:
+            classifier = pickle.load(f)
+        print("Naive Bayes model loaded successfully.")
+        return classifier
+    except Exception as e:
+        print(f"❌ Error loading Naive Bayes model: {e}")
+        return None
+
 
     except Exception as e:
         print(f"❌ Error loading Naive Bayes model: {e}")
