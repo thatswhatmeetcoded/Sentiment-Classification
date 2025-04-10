@@ -90,28 +90,13 @@ def render():
                 st.error("❗ Decision Tree model not loaded properly.")
 
             # --- Naive Bayes Prediction ---
-            # st.markdown("####  Naive Bayes Prediction")
-            # if nb_model and nb_vectorizer and nb_label_encoder:
-            #     try:
-            #         X_vec_nb = nb_vectorizer.transform([cleaned])
-            #         pred_nb = nb_model.predict(X_vec_nb)[0]
-            #         # pred_label_nb = nb_label_encoder.inverse_transform([pred_nb])[0]
-            #         st.success(f"Naive Bayes Sentiment: **{pred_nb}**")
-            #     except Exception as e:
-            #         st.error(f"❌ Naive Bayes prediction failed: {e}")
-            # else:
-            #     st.error("❗ Naive Bayes model not loaded properly.") 
-            # --- Naive Bayes Prediction ---
-            st.markdown("#### Naive Bayes (From Scratch) Prediction")
-
-            if nb_model:
+            st.markdown("####  Naive Bayes Prediction")
+            if nb_model and nb_vectorizer and nb_label_encoder:
                 try:
-                    pred_label, pred_scores = nb_model.classify_text(cleaned)
-                    st.success(f"Naive Bayes Sentiment: **{pred_label.capitalize()}**")
-                    
-                    with st.expander("See confidence scores"):
-                        st.json(pred_scores)
-
+                    X_vec_nb = nb_vectorizer.transform([cleaned])
+                    pred_nb = nb_model.predict(X_vec_nb)[0]
+                    # pred_label_nb = nb_label_encoder.inverse_transform([pred_nb])[0]
+                    st.success(f"Naive Bayes Sentiment: **{pred_nb}**")
                 except Exception as e:
                     st.error(f"❌ Naive Bayes prediction failed: {e}")
             else:
