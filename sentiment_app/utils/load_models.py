@@ -26,13 +26,15 @@ def load_decision_tree_models():
 def load_naive_bayes():
     try:
         print("Loading Naive Bayes models...")
-        vectorizer = joblib.load("../naive_bayes/vectorisers/tfidf_vectorizer.pkl")
+        #vectorizer = joblib.load("../naive_bayes/vectorisers/tfidf_vectorizer.pkl")
+        vectorizer = joblib.load("../naive_bayes/vectorisers/tokenizer_data.pkl")
         print("Vectorizer loaded")
         
         svd = joblib.load("../decision_tree/vectorizers/svd_tfidf.pkl")  # Confirm if needed
         print("SVD loaded (although unused)")
 
-        model = joblib.load("../naive_bayes/model/nb_model_tfidf.pkl")  # Check if file exists
+        #model = joblib.load("../naive_bayes/model/nb_model_tfidf.pkl")  # Check if file exists
+        model = joblib.load("../naive_bayes/model/nb_model_scratch.pkl")  # Check if file exists
         print("Model loaded")
 
         label_encoder = joblib.load("../decision_tree/vectorizers/label_encoder.pkl")  # Confirm same encoder?
