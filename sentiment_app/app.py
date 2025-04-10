@@ -95,7 +95,7 @@ elif page == "Clustering":
     import subpages.clustering as cl
     cl.render()
 
-elif page == "Simulation":
+elif page == "Live Simulation":
     import subpages.simulation as sm
     sm.render()
     
